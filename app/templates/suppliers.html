@@ -51,6 +51,10 @@
       <input class="form-input" id="sup-name" placeholder="Company name">
     </div>
     <div class="form-group">
+      <label class="form-label">Description</label>
+      <input class="form-input" id="sup-desc" placeholder="Supplier description">
+    </div>
+    <div class="form-group">
       <label class="form-label">Contact person</label>
       <input class="form-input" id="sup-contact" placeholder="Full name">
     </div>
@@ -232,6 +236,7 @@ function openModal(s) {
   document.getElementById('modal-title').textContent = s ? 'Edit supplier' : 'Add supplier';
   document.getElementById('sup-id').value      = s?.id || '';
   document.getElementById('sup-name').value    = s?.name || '';
+  document.getElementById('sup-desc').value    = s?.description || '';
   document.getElementById('sup-contact').value = s?.contact_person || '';
   document.getElementById('sup-email').value   = s?.email || '';
   document.getElementById('sup-phone').value   = s?.phone || '';
@@ -247,12 +252,14 @@ async function saveSup() {
   const id = document.getElementById('sup-id').value;
   const body = {
     name:           document.getElementById('sup-name').value.trim(),
+    description:    document.getElementById('sup-desc').value.trim(),
     contact_person: document.getElementById('sup-contact').value.trim() || null,
     email:          document.getElementById('sup-email').value.trim() || null,
     phone:          document.getElementById('sup-phone').value.trim() || null,
     address:        document.getElementById('sup-address').value.trim() || null,
   };
   if (!body.name) { toast('Name required', 'error'); return; }
+  if (!body.description) { toast('Description required', 'error'); return; }
   const btn = document.getElementById('save-btn');
   btn.disabled = true; btn.textContent = 'Saving…';
   try {

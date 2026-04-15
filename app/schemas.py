@@ -21,6 +21,7 @@ class Category(CategoryBase):
 # 🔹 Supplier Schemas
 class SupplierBase(BaseModel):
     name: str
+    description: str = Field(..., min_length=1, description="Supplier description")
     contact_person: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
