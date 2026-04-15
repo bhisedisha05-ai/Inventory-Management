@@ -539,7 +539,28 @@ function renderCharts() {
         datasets: [{
           label: 'Top Items Qty',
           data: qtyData,
-          backgroundColor: '#6bb5ff'
+          backgroundColor: qtyLabels.map((_, idx) => [
+            '#6bb5ff',
+            '#ff6b6b',
+            '#ff77dd',
+            '#d4f564',
+            '#ff9f6b',
+            '#8b6bff',
+            '#55ffbb',
+            '#ff9bff'
+          ][idx % 8]),
+          borderColor: qtyLabels.map((_, idx) => [
+            '#5a9ee3',
+            '#e55b5b',
+            '#e055c3',
+            '#a7d64b',
+            '#e58b55',
+            '#7b5fff',
+            '#47d6a2',
+            '#dd5fbf'
+          ][idx % 8]),
+          borderWidth: 1,
+          borderRadius: 6
         }]
       },
       options: {
@@ -547,7 +568,10 @@ function renderCharts() {
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false
+            display: true,
+            labels: {
+              color: '#ddd'
+            }
           },
           tooltip: {
             backgroundColor: '#222',
