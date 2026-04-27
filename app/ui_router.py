@@ -24,11 +24,7 @@ ui_router = APIRouter(prefix="/ui", tags=["UI"])
 @ui_router.get("/login", response_class=HTMLResponse, include_in_schema=False)
 async def ui_login(request: Request):
     """Login/Signup page"""
-    return templates.TemplateResponse(
-        request=request,
-        name="login.html",
-        context={"request": request}
-    )
+    return templates.TemplateResponse("login.html", {"request": request})
 
 
 # ========================
@@ -44,18 +40,14 @@ async def ui_dashboard(request: Request, db: AsyncSession = Depends(database.get
     total_cats = await db.scalar(select(func.count(models.Category.id))) or 0
     total_sups = await db.scalar(select(func.count(models.Supplier.id))) or 0
 
-    return templates.TemplateResponse(
-        request=request,
-        name="dashboard.html",
-        context={
-            "request": request,
-            "active": "dashboard",
-            "total_items": total_items,
-            "total_stock": total_stock,
-            "total_categories": total_cats,
-            "total_suppliers": total_sups
-        }
-    )
+    return templates.TemplateResponse("dashboard.html", {
+        "request": request,
+        "active": "dashboard",
+        "total_items": total_items,
+        "total_stock": total_stock,
+        "total_categories": total_cats,
+        "total_suppliers": total_sups
+    })
 
 
 # ========================
@@ -65,14 +57,10 @@ async def ui_dashboard(request: Request, db: AsyncSession = Depends(database.get
 @ui_router.get("/items", response_class=HTMLResponse, include_in_schema=False)
 async def ui_items(request: Request, db: AsyncSession = Depends(database.get_db)):
     """Items management page"""
-    return templates.TemplateResponse(
-        request=request,
-        name="items.html",
-        context={
-            "request": request,
-            "active": "items"
-        }
-    )
+    return templates.TemplateResponse("items.html", {
+        "request": request,
+        "active": "items"
+    })
 
 
 # ========================
@@ -82,14 +70,10 @@ async def ui_items(request: Request, db: AsyncSession = Depends(database.get_db)
 @ui_router.get("/categories", response_class=HTMLResponse, include_in_schema=False)
 async def ui_categories(request: Request, db: AsyncSession = Depends(database.get_db)):
     """Categories management page"""
-    return templates.TemplateResponse(
-        request=request,
-        name="categories.html",
-        context={
-            "request": request,
-            "active": "categories"
-        }
-    )
+    return templates.TemplateResponse("categories.html", {
+        "request": request,
+        "active": "categories"
+    })
 
 
 # ========================
@@ -99,14 +83,10 @@ async def ui_categories(request: Request, db: AsyncSession = Depends(database.ge
 @ui_router.get("/suppliers", response_class=HTMLResponse, include_in_schema=False)
 async def ui_suppliers(request: Request, db: AsyncSession = Depends(database.get_db)):
     """Suppliers management page"""
-    return templates.TemplateResponse(
-        request=request,
-        name="suppliers.html",
-        context={
-            "request": request,
-            "active": "suppliers"
-        }
-    )
+    return templates.TemplateResponse("suppliers.html", {
+        "request": request,
+        "active": "suppliers"
+    })
 
 
 # ========================
@@ -116,14 +96,10 @@ async def ui_suppliers(request: Request, db: AsyncSession = Depends(database.get
 @ui_router.get("/reports", response_class=HTMLResponse, include_in_schema=False)
 async def ui_reports(request: Request, db: AsyncSession = Depends(database.get_db)):
     """Reports and analytics page"""
-    return templates.TemplateResponse(
-        request=request,
-        name="reports.html",
-        context={
-            "request": request,
-            "active": "reports"
-        }
-    )
+    return templates.TemplateResponse("reports.html", {
+        "request": request,
+        "active": "reports"
+    })
 
 
 # ========================

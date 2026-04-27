@@ -21,7 +21,6 @@ class Category(CategoryBase):
 # 🔹 Supplier Schemas
 class SupplierBase(BaseModel):
     name: str
-    description: str = Field(..., min_length=1, description="Supplier description")
     contact_person: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
@@ -45,7 +44,6 @@ class ItemBase(BaseModel):
     sku: Optional[str] = None
     quantity: int
     price: float
-    total_price: Optional[float] = None  # Added total_price field
     category_id: Optional[int] = None
     supplier_id: Optional[int] = None
 
@@ -54,6 +52,7 @@ class ItemCreate(ItemBase):
 
 class Item(ItemBase):
     id: int
+    total_price: Optional[float] = None  # Calculated field, returned in response
     created_at: datetime
     updated_at: datetime
 

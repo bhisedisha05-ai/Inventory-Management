@@ -10,7 +10,7 @@ import random
 from faker import Faker
 import os
 import asyncio
-from seed_data import seed_data as seed_data_script
+from seed_data import seed_data
 
 fake = Faker()
 
@@ -30,7 +30,7 @@ async def reset_database():
             await conn.run_sync(models.Base.metadata.create_all)
         
         # Seed data
-        await seed_data_script()
+        await seed_data()
         
         return {"message": "Database reset and seeded successfully"}
     except Exception as e:
@@ -38,7 +38,7 @@ async def reset_database():
 
 
 @router.post("/seed-data")
-async def seed_data_route(db: AsyncSession = Depends(get_db)):
+async def seed_data(db: AsyncSession = Depends(get_db)):
     try:
         # ==============================
         # 🔹 1. Categories
@@ -84,7 +84,6 @@ async def seed_data_route(db: AsyncSession = Depends(get_db)):
         for s in supplier_data:
             sup = models.Supplier(
                 name=s[0],
-                description=f"{s[0]} provides high-quality goods",
                 contact_person=s[1],
                 email=s[2],
                 phone=s[3],

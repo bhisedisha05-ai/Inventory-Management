@@ -22,10 +22,10 @@ async def seed_data():
         # 🚚 Add Suppliers
         # -------------------------
         suppliers = [
-            models.Supplier(name="ABC Corp", description="Technology supplier for office and retail", contact_info="abc@example.com", address="123 Tech Road"),
-            models.Supplier(name="XYZ Traders", description="General goods distributor", contact_info="xyz@example.com", address="45 Market Lane"),
-            models.Supplier(name="GlobalTech", description="Global electronics and IT supplier", contact_info="global@example.com", address="78 Silicon Ave"),
-            models.Supplier(name="OfficeNeeds", description="Office supplies and stationery vendor", contact_info="office@example.com", address="23 Stationery St"),
+            models.Supplier(name="ABC Corp", contact_info="abc@example.com", address="123 Tech Road"),
+            models.Supplier(name="XYZ Traders", contact_info="xyz@example.com", address="45 Market Lane"),
+            models.Supplier(name="GlobalTech", contact_info="global@example.com", address="78 Silicon Ave"),
+            models.Supplier(name="OfficeNeeds", contact_info="office@example.com", address="23 Stationery St"),
         ]
         db.add_all(suppliers)
         await db.commit()
